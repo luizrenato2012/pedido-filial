@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Cadastro de Endereço</title>
+</h:head>	
+
+<h:body>
+	<h:form>
+	<h3><h:outputText value="Dados do Endereço"/></h3>
+		<h:messages id="msgEndereco" showDetail="true" showSummary="true"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Logradouro</h:outputLabel>
+			<h:inputText value="#{enderecoController.endereco.logradouro}"/>
+			
+			<h:outputLabel>Número</h:outputLabel>
+			<h:inputText value="#{enderecoController.endereco.numero}"/>
+			
+			<h:outputLabel>Bairro</h:outputLabel>
+			<h:inputText value="#{enderecoController.endereco.bairro}"/>
+			
+			<h:outputLabel>Cidade</h:outputLabel>
+			<h:inputText value="#{enderecoController.endereco.cidade}"/>
+			
+			<h:outputLabel>UF</h:outputLabel>
+			<h:selectOneMenu value="#{enderecoController.endereco.uf}">
+				<f:selectItems value="#{enderecoController.listaUfs}"/>
+			</h:selectOneMenu>
+			
+		</h:panelGrid>
+		<h:commandButton action="#{enderecoController.incluir()}" value="Gravar"></h:commandButton>
+	</h:form>
+</h:body>
+</html>
