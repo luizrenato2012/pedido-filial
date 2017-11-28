@@ -1,7 +1,7 @@
 package br.com.lrsantos.pedido.filial.model.bean;
 
 public enum UF {
-	AC("AC"), AM ("AM"), AP("AP"), MA("MA"),PA("PA"),TO("TO");
+	AC("AC"), AM ("AM"), AP("AP"), DF("DF"),MA("MA"),PA("PA"),TO("TO");
 	
 	private String value;
 	

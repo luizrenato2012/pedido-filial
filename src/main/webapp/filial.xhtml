@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Cadastro de Filial</title>
+</h:head>	
+
+<h:body>
+
+	<h2><h:outputText value="Cadastro de Filial"/></h2>
+	<h:form>
+	
+	<h3><h:outputText value="Dados de Identificação"/></h3>
+		<h:messages id="msgFilial" showDetail="true" showSummary="false"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Sigla</h:outputLabel>
+			<h:inputText value="#{filialController.filial.sigla}" required="true" requiredMessage="Sigla obrigatória"/>
+			
+			<h:outputLabel>Nome</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.nome}" required="true" requiredMessage="Nome obrigatório"/>
+			
+			<h:outputLabel>CNPJ</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.cnpj}"/>
+			
+			<h:outputLabel>Ins. Estadual</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.inscricaoEstadual}"/>
+			
+		</h:panelGrid>
+	
+	<hr/>
+	<h3><h:outputText value="Dados de Endereço"/></h3>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Logradouro</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.endereco.logradouro}" required="true" requiredMessage="Logradouro obrigatório"/>
+			
+			<h:outputLabel>Número</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.endereco.numero}"/>
+			
+			<h:outputLabel>Bairro</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.endereco.bairro}"/>
+			
+			<h:outputLabel>Cidade</h:outputLabel>
+			<h:inputText value="#{filialController.pessoa.endereco.cidade}" required="true" requiredMessage="Cidade obrigatória"/>
+			
+			<h:outputLabel>UF</h:outputLabel>
+			<h:selectOneMenu value="#{filialController.pessoa.endereco.uf}">
+				<f:selectItems value="#{filialController.listaUfs}"/>
+			</h:selectOneMenu>
+			
+		</h:panelGrid>
+		<h:commandButton action="#{filialController.incluir()}" value="Gravar"></h:commandButton>
+		<br/> <br/>
+		<h:dataTable rendered="#{not empty filialController.filiais}" value="#{filialController.filiais}"  var="filial">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Sigla"/>
+				</f:facet>
+				
+				<h:outputText value="#{filial.sigla}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Nome"/>
+				</f:facet>
+				
+				<h:outputText value="#{filial.pessoaJuridica.nome}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Cidade"/>
+				</f:facet>
+				
+				<h:outputText value="#{filial.pessoaJuridica.endereco.cidade}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="UF"/>
+				</f:facet>
+				
+				<h:outputText value="#{filial.pessoaJuridica.endereco.uf}"/>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+	
+	
+</h:body>
+</html>

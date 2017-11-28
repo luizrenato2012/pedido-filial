@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -28,6 +29,10 @@ public class Cliente {
 	@Column(name="situacao")
 	@Enumerated(EnumType.STRING)
 	private SituacaoCliente situacaoCliente;
+	
+	@ManyToOne
+	@JoinColumn(name="id_filial")
+	private Filial filial;
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -43,6 +48,14 @@ public class Cliente {
 
 	public void setSituacaoCliente(SituacaoCliente situacaoCliente) {
 		this.situacaoCliente = situacaoCliente;
+	}
+	
+	public Filial getFilial() {
+		return filial;
+	}
+
+	public void setFilial(Filial filial) {
+		this.filial = filial;
 	}
 
 	@Override

@@ -18,10 +18,6 @@ public class Endereco implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public Endereco() {
-		System.out.println("Criando endereco");
-	}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ID_ENDERECO")
 	private Long id;

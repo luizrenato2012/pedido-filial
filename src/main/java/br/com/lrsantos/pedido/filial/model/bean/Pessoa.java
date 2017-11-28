@@ -1,5 +1,6 @@
 package br.com.lrsantos.pedido.filial.model.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,11 +26,11 @@ public class Pessoa {
 	
 	private String nome;
 	
-	@OneToOne // caso especfico de teste normalmente é lista
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}) // caso especfico de teste normalmente é lista
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco;
 	
-	@OneToOne // caso especfico de teste normalmente é lista
+	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE}) // caso especfico de teste normalmente é lista
 	@JoinColumn(name="id_telefone")
 	private Telefone telefone;
 

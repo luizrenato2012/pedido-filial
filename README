@@ -1,1 +1,3 @@
 Projeto de teste onde simula a criação e envio de pedidos de venda para processamento na matriz.
+
+Utiliza Java EE (JSF, JMS, JAX-WS, JPA) entre outras tecnologias.

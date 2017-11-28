@@ -1,6 +1,5 @@
 package br.com.lrsantos.pedido.filial.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,7 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.lrsantos.pedido.filial.model.bean.Endereco;
-import br.com.lrsantos.pedido.filial.model.bean.UF;
 import br.com.lrsantos.pedido.filial.model.service.EnderecoService;
 
 @Named
@@ -51,14 +49,9 @@ public class EnderecoController {
 	}
 	
 	public List<SelectItem> getListaUfs() {
-		List<SelectItem> items = new ArrayList<SelectItem>();
-		for(UF uf : UF.values()){
-			items.add(new SelectItem(uf, uf.getValue()));
-		}
-		return items;
+		return UFSelectItemUtils.getItensUF();
 	}
 	
-
 	public Endereco getEndereco() {
 		return endereco;
 	}
