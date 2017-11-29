@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Cadastro de Produto</title>
+</h:head>	
+
+<h:body>
+	<h2><h:outputText value="Cadastro de Produto"/></h2>
+	<h:form>
+		<h:messages id="msgProduto" showDetail="true" showSummary="false"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Descrição</h:outputLabel>
+			<h:inputText value="#{produtoController.produto.descricao}" required="true" requiredMessage="Descrição obrigatória"/>
+			
+			<h:outputLabel>Marca</h:outputLabel>
+			<h:inputText value="#{produtoController.produto.marca}"/>
+			
+			<h:outputLabel>Modelo</h:outputLabel>
+			<h:inputText value="#{produtoController.produto.modelo}"/>
+			
+			<h:outputLabel>Preço</h:outputLabel>
+			<h:inputText value="#{produtoController.produto.preco}" required="true" requiredMessage="Preco obrigatório">
+				<f:converter converterId="javax.faces.BigDecimal" />
+				<f:validateDoubleRange minimum="0.1"/>
+			</h:inputText>
+			
+		</h:panelGrid>
+		<h:commandButton action="#{produtoController.incluir()}" value="Gravar"></h:commandButton>
+	</h:form>
+</h:body>
+</html>

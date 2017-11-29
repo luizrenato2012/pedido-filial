@@ -10,6 +10,6 @@ import br.com.lrsantos.pedido.filial.model.bean.Cliente;
 public interface ClienteWebService {
 	
 	@WebMethod(operationName="inclui", action="incluiCliente")
-	public void inclui( Cliente cliente) ;
+	public void inclui( Cliente cliente);
 
 }
