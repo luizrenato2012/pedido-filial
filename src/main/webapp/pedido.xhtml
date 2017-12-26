@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Cadastro de Pedido</title>
+</h:head>	
+
+<h:body>
+	<h2><h:outputText value="Cadastro de Pedido"/></h2>
+	<h:form>
+		<h:messages id="msgPedido" showDetail="true" showSummary="false"/>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Data/Hora</h:outputLabel>
+			<h:inputText value="#{pedidoController.pedido.dataHora}" required="true" requiredMessage="Data/hora obrigatória">
+				<f:convertDateTime/>
+			</h:inputText>
+			
+			<h:outputLabel>Marca</h:outputLabel>
+			<h:inputText value="#{pedidoController.produto.marca}"/>
+			
+			<h:outputLabel>Modelo</h:outputLabel>
+			<h:inputText value="#{pedidoController.produto.modelo}"/>
+			
+			<h:outputLabel>Preço</h:outputLabel>
+			<h:inputText value="#{pedidoController.produto.preco}" required="true" requiredMessage="Preco obrigatório">
+				<f:converter converterId="javax.faces.BigDecimal" />
+				<f:validateDoubleRange minimum="0.1"/>
+			</h:inputText>
+			
+		</h:panelGrid>
+		<h:commandButton action="#{pedidoController.incluir()}" value="Gravar"></h:commandButton>
+	</h:form>
+</h:body>
+</html>

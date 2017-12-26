@@ -2,7 +2,7 @@ package br.com.lrsantos.pedido.filial.model.bean;
 
 public enum SituacaoPedido {
 
-	AB("Aberto"), EA("Em Analise"), FC("Fechada"), PD("Pendente");
+	AB("Aberto"), CR("Em Criação") ,EA("Em Analise"), FC("Fechada"), PD("Pendente");
 	
 	private String descricao;
 

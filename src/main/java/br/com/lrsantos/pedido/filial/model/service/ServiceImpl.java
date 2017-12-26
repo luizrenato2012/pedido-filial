@@ -1,5 +1,6 @@
 package br.com.lrsantos.pedido.filial.model.service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
-public class ServiceImpl <T,PK> implements AbstractService<T, Long> {
+public class ServiceImpl <T,PK> implements AbstractService<T, Serializable> {
 
 	@PersistenceContext(name="pedido-filialPU")
 	private EntityManager entityManager;
@@ -30,7 +31,7 @@ public class ServiceImpl <T,PK> implements AbstractService<T, Long> {
 	}
 
 	@Override
-	public T find(Long pk, Class <T> classe) {
+	public T find(Serializable pk, Class <T> classe) {
 		return this.entityManager.find(classe, pk);
 	}
 
