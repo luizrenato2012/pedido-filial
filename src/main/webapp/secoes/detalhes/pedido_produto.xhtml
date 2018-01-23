@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:panel header="Produtos">
+	<div class="ui-g">
+		<div class="ui-g-12">
+			<p:commandButton value="..."/>
+			<p:inputText value="Nome do Produto" style="width: 50%; margin-right: 10px; "/>
+			<h:outputLabel style="margin-right: 10px;">Preço</h:outputLabel>
+		
+			<p:inputText value="#{pedidoController.item.produto.preco}"
+				required="true" requiredMessage="Preco obrigatório" >
+				<f:converter converterId="javax.faces.BigDecimal" />
+				<f:validateDoubleRange minimum="0.1" />
+			</p:inputText>
+		</div>
+	</div>
+	
+	<p:panelGrid columns="7">
+		
+		
+		<h:outputLabel>Quant.</h:outputLabel>
+		<p:inputText value="4"/>
+		
+		<h:outputLabel>Total Item.</h:outputLabel>
+		<p:inputText value="100,00"/>
+		
+		<p:commandButton value="+"/>
+	<p:inputText value="#{pedidoController.item.quantidade}"/>
+	</p:panelGrid>
+	</p:panel>
+</ui:composition>
+</html>

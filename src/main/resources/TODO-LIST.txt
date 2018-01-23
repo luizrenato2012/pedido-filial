@@ -1,0 +1,6 @@
+Impplementar
+
+ - Criar cadastro de vendedor
+ - Alterar pedido p/ exibir vendedor logado
+ - Criar controle de Acesso
+ 	- Criar cadastro de Usuarios

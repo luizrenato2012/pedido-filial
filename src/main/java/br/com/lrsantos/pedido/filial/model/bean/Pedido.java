@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,8 +19,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Table(name="db.pedido")
+import org.hibernate.annotations.Cascade;
+
 @Entity
+@Table(name="db.pedido")
 @SequenceGenerator(name="SEQ_ID_PEDIDO", sequenceName="seq_id_pedido", schema="db", allocationSize=1)
 public class Pedido implements Serializable {
 
@@ -29,19 +32,24 @@ public class Pedido implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ID_PEDIDO")
 	private Long id;
 	
+	@Column
+	private Long numero;
+	
+	@Column(name="data_hora")
 	private LocalDateTime dataHora;
 	
+	@Column(name="valor_total")
 	private BigDecimal valorTotal;
 	
 	@Column(name="id_situacao")
 	@Enumerated(EnumType.STRING)
 	private SituacaoPedido situacao;
 	
-	@OneToMany
+	@OneToMany(cascade={CascadeType.PERSIST,CascadeType.REMOVE}, mappedBy="pedido")
 	private List<ItemPedido> itens;
 	
 	@ManyToOne
-	@JoinColumn(name="id_cliente")
+	@JoinColumn(name="id_cliente", insertable=true)
 	private Cliente cliente;
 
 	@Override
@@ -128,7 +136,14 @@ public class Pedido implements Serializable {
 	public void setItens(List<ItemPedido> itens) {
 		this.itens = itens;
 	}
-	
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
+	}
 	
 	
 }

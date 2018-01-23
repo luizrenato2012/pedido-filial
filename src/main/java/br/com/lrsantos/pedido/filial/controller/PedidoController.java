@@ -2,27 +2,69 @@ package br.com.lrsantos.pedido.filial.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 
+import br.com.lrsantos.pedido.filial.model.bean.Cliente;
+import br.com.lrsantos.pedido.filial.model.bean.ItemPedido;
+import br.com.lrsantos.pedido.filial.model.bean.ItemPedidoID;
 import br.com.lrsantos.pedido.filial.model.bean.Pedido;
+import br.com.lrsantos.pedido.filial.model.bean.Produto;
 import br.com.lrsantos.pedido.filial.model.bean.SituacaoPedido;
+import br.com.lrsantos.pedido.filial.model.service.ClienteService;
 import br.com.lrsantos.pedido.filial.model.service.PedidoService;
+import br.com.lrsantos.pedido.filial.model.service.ProdutoService;
 
 @Named
 public class PedidoController {
 
 	@EJB
 	private PedidoService pedidoService;
+	
+	@EJB
+	private ClienteService clienteService;
+	
+	@EJB
+	private ProdutoService produtoService;
+	
 	private Pedido pedido;
+	
+	private List<ItemPedido> itens;
+	private ItemPedido item;
 	
 	@PostConstruct
 	private void init() {
 		this.pedido = new Pedido();
 		this.pedido.setDataHora(LocalDateTime.now());
 		this.pedido.setSituacao(SituacaoPedido.CR);
+		this.item = new ItemPedido();
+		this.item.setProduto(new Produto());
+	}
+	
+	public void testePedido() {
+		Pedido pedido = new Pedido();
+		pedido.setDataHora(LocalDateTime.now());
+		pedido.setSituacao(SituacaoPedido.AB);
+		
+		ItemPedido item = new ItemPedido();
+//		ItemPedidoID itemId = new ItemPedidoID();
+//		itemId.setNumero(1);
+//		itemId.setPedido(pedido.getId());
+		item.setNumero(1);
+		item.setPedido(pedido);
+		Produto produto = this.produtoService.find(14l, Produto.class);
+		item.setProduto(produto);
+		
+		pedido.setItens(new ArrayList<>());
+		pedido.getItens().add(item);
+		
+		Cliente cliente = this.clienteService.find(1l, Cliente.class);
+		pedido.setCliente(cliente);
+		this.pedidoService.persist(pedido);
 	}
 	
 	public void incluir() {
@@ -56,6 +98,22 @@ public class PedidoController {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+
+	public ItemPedido getItem() {
+		return item;
+	}
+
+	public void setItem(ItemPedido item) {
+		this.item = item;
 	}
 	
 }

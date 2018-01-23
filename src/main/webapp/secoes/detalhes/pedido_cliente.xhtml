@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:panel header="Cliente">
+		<div class="ui-g">
+			<div class="ui-g-12" style="width=100%">
+				<p:commandButton value="..." />
+				<p:inputText value="Nome do Cliente" style="width: 90%;"/>
+			</div>
+		</div>
+		<div class="ui-g">
+			<div class="ui-g-2">
+				<h:outputLabel style="margin-right: 10px;">CNPJ</h:outputLabel>
+				<p:inputText value="CNPJ do Cliente" />
+			</div>
+			<div class="ui-g-2"></div>
+			<div class="ui-g-3">
+				<h:outputLabel style="margin-right: 10px;">Telefone</h:outputLabel>
+				<p:inputText value="Telefone do Cliente" />
+			</div>
+			<div class="ui-g-2"></div>
+			<div class="ui-g-3">
+				<h:outputLabel style="margin-right: 10px;">Contato</h:outputLabel>
+				<p:inputText value="Contato do Cliente" style="width: 90%;"/>
+			</div>
+		</div>
+	</p:panel>
+</ui:composition>
+</html>

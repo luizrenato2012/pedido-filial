@@ -3,8 +3,9 @@ package br.com.lrsantos.pedido.filial.model.service;
 import javax.ejb.Stateless;
 
 import br.com.lrsantos.pedido.filial.model.bean.ItemPedido;
+import br.com.lrsantos.pedido.filial.model.bean.ItemPedidoID;
 
 @Stateless
-public class ItemPedidoService extends ServiceImpl<ItemPedido, ItemPedido.ItemPedidoID>{
+public class ItemPedidoService extends ServiceImpl<ItemPedido,ItemPedidoID>{
 	
 }

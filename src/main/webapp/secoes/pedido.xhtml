@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Pedido</title>
+</h:head>
+
+<ui:composition template="/template/main.xhtml">
+	<ui:define name="title">Cadastro de Pedidos</ui:define>
+	
+	<ui:define name="content">
+		<h2>
+			<p:outputLabel value="Cadastro de Pedido" />
+		</h2>
+		
+		<h:form>
+			<p:messages id="msgPedido" showDetail="true" showSummary="false" />
+				
+				<p:panel header="Pedido">
+				<div class="ui-g">
+					<div class="ui-g-3">
+						<p:outputLabel>Número</p:outputLabel>
+						<p:inputText value="#{pedidoController.pedido.numero}" readonly="true" style="width: 85%;"/>
+					</div>
+					
+					<div class="ui-g-3">
+						<p:outputLabel>Data</p:outputLabel>
+						<p:inputText value="#{pedidoController.pedido.dataHora}" required="true" requiredMessage="Data/hora obrigatória" style="width: 90%;"/>
+					</div>
+					
+					<div class="ui-g-3">
+						<p:outputLabel>Vendedor</p:outputLabel>
+						<p:inputText value="Vendedor 1"  style="width: 80%;"/>
+					</div>
+					
+					<div class="ui-g-3">
+						<p:outputLabel>Situacao</p:outputLabel>
+					    <p:inputText value="Em criação" style="width: 80%;"/>
+					</div>
+				</div>
+				</p:panel>
+			
+			<!-- painel com dados do cliente -->
+			<ui:include src="detalhes/pedido_cliente.xhtml"></ui:include>
+			
+			<!-- painel com dados dos produtos -->
+			<ui:include src="detalhes/pedido_produto.xhtml"></ui:include>
+
+		</h:form>
+		<h:form>
+			<p:commandButton action="#{pedidoController.testePedido}" value="Testar"/>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

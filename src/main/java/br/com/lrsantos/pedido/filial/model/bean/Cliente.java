@@ -1,5 +1,7 @@
 package br.com.lrsantos.pedido.filial.model.bean;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,7 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -33,6 +37,12 @@ public class Cliente {
 	@ManyToOne
 	@JoinColumn(name="id_filial")
 	private Filial filial;
+	
+	@OneToMany
+	@JoinTable( name="cliente_contato" , 
+				joinColumns=@JoinColumn(name="id_cliente"), 
+				inverseJoinColumns=@JoinColumn(name="id_contato")) 
+	private List<PessoaFisica> contatos;
 
 	public Pessoa getPessoa() {
 		return pessoa;
@@ -56,6 +66,22 @@ public class Cliente {
 
 	public void setFilial(Filial filial) {
 		this.filial = filial;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<PessoaFisica> getContatos() {
+		return contatos;
+	}
+
+	public void setContatos(List<PessoaFisica> contatos) {
+		this.contatos = contatos;
 	}
 
 	@Override
