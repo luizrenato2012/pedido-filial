@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("J")
 public class PessoaJuridica extends Pessoa {
 	
+	@Column
 	private String cnpj;
 	
 	@Column(name="inscricao_estadual")

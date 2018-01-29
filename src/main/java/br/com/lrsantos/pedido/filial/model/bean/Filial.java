@@ -1,9 +1,9 @@
 package br.com.lrsantos.pedido.filial.model.bean;
 
-import java.util.List;
+import java.io.Serializable;
 
-import javax.faces.model.SelectItem;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,22 +13,27 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.lrsantos.pedido.filial.controller.UFSelectItemUtils;
-
 @Entity
 @Table(name="db.filial")
 @SequenceGenerator(schema="db", name="SEQ_ID_FILIAL", sequenceName="seq_id_filial", initialValue=1, allocationSize=1)
-public class Filial {
+public class Filial implements Serializable {
 	
+	private static final long serialVersionUID = 8675982728019483718L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ID_FILIAL")
 	private Long id;
 	
+	@Column
 	private String sigla;
 	
 	@OneToOne(cascade={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="id_pessoa_juridica")
 	private PessoaJuridica pessoaJuridica;
+	
+	public Filial() {
+		super();
+	}
 
 	public Long getId() {
 		return id;
@@ -54,10 +59,6 @@ public class Filial {
 		this.pessoaJuridica = pessoaJuridica;
 	}
 	
-	public List<SelectItem> getListUf() {
-		return UFSelectItemUtils.getItensUF();
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -7,19 +7,18 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(name="db.pedido")
@@ -27,10 +26,9 @@ import org.hibernate.annotations.Cascade;
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 8568405936214209751L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ID_PEDIDO")
-	private Long id;
+	
+	@EmbeddedId
+	private PedidoId id;
 	
 	@Column
 	private Long numero;
@@ -89,13 +87,6 @@ public class Pedido implements Serializable {
 		return true;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public LocalDateTime getDataHora() {
 		return dataHora;
@@ -145,5 +136,80 @@ public class Pedido implements Serializable {
 		this.numero = numero;
 	}
 	
+	public PedidoId getId() {
+		return id;
+	}
+
+	public void setId(PedidoId id) {
+		this.id = id;
+	}
+
+	@Embeddable
+	public static class PedidoId implements Serializable {
+		
+		private static final long serialVersionUID = 5286520553385297033L;
+
+		@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ID_PEDIDO")
+		private Long id;
+		
+		@ManyToOne
+		@JoinColumn(name="id_filial")
+		private Filial filial;
+
+		public PedidoId() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
+		public Filial getFilial() {
+			return filial;
+		}
+
+		public void setFilial(Filial filial) {
+			this.filial = filial;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((filial == null) ? 0 : filial.hashCode());
+			result = prime * result + ((id == null) ? 0 : id.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			PedidoId other = (PedidoId) obj;
+			if (filial == null) {
+				if (other.filial != null)
+					return false;
+			} else if (!filial.equals(other.filial))
+				return false;
+			if (id == null) {
+				if (other.id != null)
+					return false;
+			} else if (!id.equals(other.id))
+				return false;
+			return true;
+		}
+		
+	}
+	
 	
 }
+
