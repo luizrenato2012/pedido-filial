@@ -2,39 +2,23 @@ package br.com.lrsantos.pedido.filial.controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 
-import br.com.lrsantos.pedido.filial.model.bean.Cliente;
-import br.com.lrsantos.pedido.filial.model.bean.Filial;
 import br.com.lrsantos.pedido.filial.model.bean.ItemPedido;
 import br.com.lrsantos.pedido.filial.model.bean.Pedido;
 import br.com.lrsantos.pedido.filial.model.bean.Produto;
 import br.com.lrsantos.pedido.filial.model.bean.SituacaoPedido;
-import br.com.lrsantos.pedido.filial.model.bean.Pedido.PedidoId;
-import br.com.lrsantos.pedido.filial.model.service.ClienteService;
-import br.com.lrsantos.pedido.filial.model.service.FilialService;
 import br.com.lrsantos.pedido.filial.model.service.PedidoService;
-import br.com.lrsantos.pedido.filial.model.service.ProdutoService;
 
 @Named
 public class PedidoController {
 
 	@EJB
 	private PedidoService pedidoService;
-	
-	@EJB
-	private ClienteService clienteService;
-	
-	@EJB
-	private ProdutoService produtoService;
-	
-	@EJB
-	private FilialService filialservice;
 	
 	private Pedido pedido;
 	
@@ -51,30 +35,7 @@ public class PedidoController {
 	}
 	
 	public void testePedido() {
-		Pedido pedido = new Pedido();
-		PedidoId pedidoId = new PedidoId();
-		//Filial filial = this.filialservice.find(11l, Filial.class);
-//		/pedidoId.setFilial(filial);
-		pedido.setId(pedidoId);
-		pedido.setDataHora(LocalDateTime.now());
-		pedido.setSituacao(SituacaoPedido.AB);
-		
-//		pedido.set
-		ItemPedido item = new ItemPedido();
-//		ItemPedidoID itemId = new ItemPedidoID();
-//		itemId.setNumero(1);
-//		itemId.setPedido(pedido.getId());
-		item.setNumero(1);
-		item.setPedido(pedido);
-		Produto produto = this.produtoService.find(14l, Produto.class);
-		item.setProduto(produto);
-		
-		pedido.setItens(new ArrayList<>());
-		pedido.getItens().add(item);
-		
-		Cliente cliente = this.clienteService.find(1l, Cliente.class);
-		pedido.setCliente(cliente);
-		this.pedidoService.persist(pedido);
+		this.pedidoService.teste();
 	}
 	
 	public void incluir() {

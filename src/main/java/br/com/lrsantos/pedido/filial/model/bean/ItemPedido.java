@@ -4,28 +4,23 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@IdClass(ItemPedidoID.class)
 @Table(name="db.item_pedido")
 public class ItemPedido implements Serializable {
 	
 	private static final long serialVersionUID = -5244754215391977588L;
+	
+	@EmbeddedId
+	private ItemPedidoID id;
 
-	@Id
-	private Integer numero;
-	
-	@Id
-	@ManyToOne
-	@JoinColumn(name="id_pedido")
-	private br.com.lrsantos.pedido.filial.model.bean.Pedido pedido;
-	
 	@Column(precision=6, scale=2)
 	private BigDecimal valor;
 	
@@ -36,6 +31,15 @@ public class ItemPedido implements Serializable {
 	@JoinColumn(name="id_produto")
 	private Produto produto;
 	
+	
+	public ItemPedidoID getId() {
+		return id;
+	}
+
+	public void setId(ItemPedidoID id) {
+		this.id = id;
+	}
+
 	public BigDecimal getValor() {
 		return valor;
 	}
@@ -60,31 +64,23 @@ public class ItemPedido implements Serializable {
 		this.quantidade = quantidade;
 	}
 
-	public Integer getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
-	
 	
 	public static class ItemPedidoID implements Serializable{
-
-		private static final long serialVersionUID = 9045566983183750377L;
 		
+		private static final long serialVersionUID = -2058609977546062085L;
+
 		private Integer numero;
 		
-		private Long pedido;
+		@OneToOne
+		@JoinColumns({@JoinColumn(name="id_pedido"), @JoinColumn(name="id_filial")})
+		private Pedido pedido;
 		
+		public ItemPedidoID(Integer numero, Pedido pedido) {
+			super();
+			this.numero = numero;
+			this.pedido = pedido;
+		}
+
 		public ItemPedidoID() {
 			super();
 		}
@@ -97,20 +93,14 @@ public class ItemPedido implements Serializable {
 			this.numero = numero;
 		}
 
-		public Long getPedido() {
-			return pedido;
-		}
-
-		public void setPedido(Long pedido) {
-			this.pedido = pedido;
-		}
-
 		@Override
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((numero == null) ? 0 : numero.hashCode());
-			result = prime * result + ((pedido == null) ? 0 : pedido.hashCode());
+			result = prime * result
+					+ ((numero == null) ? 0 : numero.hashCode());
+			result = prime * result
+					+ ((pedido == null) ? 0 : pedido.hashCode());
 			return result;
 		}
 
@@ -135,6 +125,10 @@ public class ItemPedido implements Serializable {
 				return false;
 			return true;
 		}
+		
+		
+
+
 	}
 	
 }
