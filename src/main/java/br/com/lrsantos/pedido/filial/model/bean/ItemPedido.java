@@ -72,13 +72,18 @@ public class ItemPedido implements Serializable {
 		private Integer numero;
 		
 		@OneToOne
-		@JoinColumns({@JoinColumn(name="id_pedido"), @JoinColumn(name="id_filial")})
+		@JoinColumns({@JoinColumn(name="id_filial"), @JoinColumn(name="id_pedido")})
 		private Pedido pedido;
 		
 		public ItemPedidoID(Integer numero, Pedido pedido) {
 			super();
 			this.numero = numero;
 			this.pedido = pedido;
+		}
+		
+		public ItemPedidoID(Integer numero) {
+			super();
+			this.numero = numero;
 		}
 
 		public ItemPedidoID() {
@@ -125,10 +130,13 @@ public class ItemPedido implements Serializable {
 				return false;
 			return true;
 		}
-		
-		
 
-
+		public void setPedido(Pedido pedido) {
+			this.pedido = pedido;
+		}
+		
 	}
+	
+	
 	
 }

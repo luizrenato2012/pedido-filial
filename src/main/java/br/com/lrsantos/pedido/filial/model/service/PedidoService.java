@@ -1,5 +1,6 @@
 package br.com.lrsantos.pedido.filial.model.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -25,25 +26,31 @@ public class PedidoService extends ServiceImpl<Pedido, Long> {
 	@EJB
 	private FilialService filialservice;
 	
+	@EJB
+	private ItemPedidoService itemPedidoService;
+	
 	public void teste() {
 		Pedido pedido = new Pedido();
-		Filial filial = this.filialservice.find(11l, Filial.class);
+		Filial filial = this.filialservice.find(12l, Filial.class);
 		pedido.setFilial(filial);
 		pedido.setDataHora(LocalDateTime.now());
 		pedido.setSituacao(SituacaoPedido.AB);
-		
-//		this.persist(pedido);
+		pedido.setNumero(1002l);
+		pedido.setValorTotal(new BigDecimal(9.3));
+		this.persist(pedido);
 		
 		ItemPedido item = new ItemPedido();
-		item.setId(new ItemPedido.ItemPedidoID(new Integer(10), pedido));
+		item.setId(new ItemPedido.ItemPedidoID(new Integer(3 ), pedido));
 		Produto produto = this.produtoService.find(14l, Produto.class);
 		item.setProduto(produto);
+		item.setQuantidade(2);
+		item.setValor(new BigDecimal(9.3));
+		this.itemPedidoService.persist(item);
 		
-		pedido.setItens(new ArrayList<>());
-		pedido.getItens().add(item);
+		pedido.addItem(item);
 		
 		Cliente cliente = this.clienteService.find(1l, Cliente.class);
 		pedido.setCliente(cliente);
-		this.persist(pedido);
+		this.update(pedido);
 	}
 }

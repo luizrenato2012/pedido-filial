@@ -3,6 +3,7 @@ package br.com.lrsantos.pedido.filial.model.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -59,6 +60,13 @@ public class Pedido implements Serializable {
 
 	public Pedido() {
 		super();
+	}
+	
+	public void addItem(ItemPedido item) {
+		if(this.itens==null){
+			this.itens = new ArrayList<ItemPedido>();
+		}
+		this.itens.add(item);
 	}
 
 	public LocalDateTime getDataHora() {
