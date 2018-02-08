@@ -8,14 +8,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<p:panel header="Cliente">
+	<p:panel header="Cliente" id="pnl_pedido_cliente">
 		<div class="ui-g">
 			<div class="ui-g-12" style="width=100%">
 				<p:commandButton value="..." />
 				<p:inputText value="Nome do Cliente" style="width: 90%;"/>
 			</div>
 		</div>
-		<div class="ui-g">
+	<!-- <div class="ui-g">
 			<div class="ui-g-2">
 				<h:outputLabel style="margin-right: 10px;">CNPJ</h:outputLabel>
 				<p:inputText value="CNPJ do Cliente" />
@@ -30,7 +30,17 @@
 				<h:outputLabel style="margin-right: 10px;">Contato</h:outputLabel>
 				<p:inputText value="Contato do Cliente" style="width: 90%;"/>
 			</div>
-		</div>
+		</div>	-->
+		
+		<p:panelGrid columns="3" style="width: 100%;" styleClass="sem-borda">
+			<h:outputLabel style="margin-right: 10px;">CNPJ</h:outputLabel>
+			<h:outputLabel style="margin-right: 10px;">Telefone</h:outputLabel>
+			<h:outputLabel style="margin-right: 10px;">Contato</h:outputLabel>
+			
+			<p:inputText value="CNPJ do Cliente" />
+			<p:inputText value="Telefone do Cliente" />
+			<p:inputText value="Contato do Cliente" />
+		</p:panelGrid>
 	</p:panel>
 </ui:composition>
 </html>

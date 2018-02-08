@@ -44,7 +44,7 @@ public class PedidoService extends ServiceImpl<Pedido, Long> {
 		Produto produto = this.produtoService.find(14l, Produto.class);
 		item.setProduto(produto);
 		item.setQuantidade(2);
-		item.setValor(new BigDecimal(9.3));
+		item.setValorUnitario(new BigDecimal(9.3));
 		this.itemPedidoService.persist(item);
 		
 		pedido.addItem(item);

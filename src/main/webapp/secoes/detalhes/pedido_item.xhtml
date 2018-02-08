@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:panel header="Produtos" id="pnl_pedido_produto">
+		<div class="ui-g">
+				<div class="ui-g-12">
+					<p:commandButton value="..."/>
+					<p:inputText value="Nome do Produto" style="width: 90%;"/>
+				</div>
+		</div>
+	
+		<!-- <div class="ui-g">
+			<div class="ui-g-3">
+				<h:outputLabel style="margin-right: 10px;">Preço</h:outputLabel>
+						<p:inputText value="#{pedidoController.item.produto.preco}" required="true" requiredMessage="Preco obrigatório" readonly="true">
+							<f:converter converterId="javax.faces.BigDecimal" />
+							<f:validateDoubleRange minimum="0.1" />
+						</p:inputText>
+			</div>
+			
+			<div class="ui-g-3">
+				<h:outputLabel style="margin-right: 10px;">Quant.</h:outputLabel>
+				<p:inputText value="4"/>
+			</div>
+			
+			<div class="ui-g-4">
+				<h:outputLabel style="margin-right: 10px;">Total Item</h:outputLabel>
+				<p:inputText value="100,00"/>
+			</div>
+			
+			<div class="ui-g-1"></div>
+			
+			<div class="ui-g-1">
+				<p:commandButton value=" + "/>
+			</div>
+		</div>	 -->
+		<p:panelGrid columns="4" style="width: 95%;" styleClass="sem-borda">
+				<h:outputLabel style="margin-right: 10px;">Preço</h:outputLabel>
+				<h:outputLabel style="margin-right: 10px;">Quant.</h:outputLabel>
+				<h:outputLabel style="margin-right: 10px;">Total Item</h:outputLabel>
+				<h:outputLabel></h:outputLabel>
+
+				<p:inputText value="#{pedidoController.item.produto.preco}" required="true" requiredMessage="Preco obrigatório" readonly="true">
+					<f:converter converterId="javax.faces.BigDecimal" />
+					<f:validateDoubleRange minimum="0.1" />
+				</p:inputText>
+				<p:inputText value="4"/>
+				<p:inputText value="100,00"/>
+				<p:commandButton value="Incluir" action="#{pedidoController.incluiItem()}"/>
+		</p:panelGrid>
+		<br/>
+		
+		<p:dataTable value="#{pedidoController.itens}" var="item" paginator="true" rows="10" style="width: 95%;">
+			<p:column headerText="Nº" width="1">
+				#{item.numero}
+			</p:column>
+			
+			<p:column headerText="Descrição" width="85">
+				#{item.produto.descricao}
+			</p:column>
+			
+			<p:column headerText="Valor Unit." width="20">
+				#{item.valorUnitario}
+			</p:column>
+			
+			<p:column headerText="Quant." width="10">
+				#{item.produto.quantidade}
+			</p:column>
+			
+			<p:column headerText="Valor Total" width="20">
+				#{item.valorTotal}
+			</p:column>
+		</p:dataTable>		
+	</p:panel>
+	
+</ui:composition>
+</html>

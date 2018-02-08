@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<p:messages id="msgPedido" showDetail="true" showSummary="false" />
+
+	<p:panel header="Pedido">
+	
+		<p:panelGrid columns="4" style="width: 100%;" styleClass="sem-borda">
+			<p:outputLabel>Número</p:outputLabel>
+			<p:outputLabel>Data</p:outputLabel>
+			<p:outputLabel>Vendedor</p:outputLabel>
+			<p:outputLabel>Situacao</p:outputLabel>
+				
+			<p:inputText value="#{pedidoController.pedido.numero}" 	readonly="true"  />
+			<p:inputText value="#{pedidoController.pedido.dataHora}" required="true" requiredMessage="Data/hora obrigatória" />
+			<p:inputText value="Vendedor 1" style="width: 80%;" />
+			<p:inputText value="Em criação" />
+		</p:panelGrid>
+		
+		<!-- 
+		<div class="ui-g">
+			<div class="ui-g-3">
+				<p:outputLabel>Número</p:outputLabel>
+				<p:inputText value="#{pedidoController.pedido.numero}" 	readonly="true" style="width: 85%;" />
+			</div>
+
+			<div class="ui-g-3">
+				<p:outputLabel>Data</p:outputLabel>
+				<p:inputText value="#{pedidoController.pedido.dataHora}"
+					required="true" requiredMessage="Data/hora obrigatória" style="width: 90%;" />
+			</div>
+
+			<div class="ui-g-3">
+				<p:outputLabel>Vendedor</p:outputLabel>
+				<p:inputText value="Vendedor 1" style="width: 80%;" />
+			</div>
+
+			<div class="ui-g-3">
+				<p:outputLabel>Situacao</p:outputLabel>
+				<p:inputText value="Em criação" />
+			</div>
+		</div>  
+			-->
+	</p:panel>
+</ui:composition>
+</html>

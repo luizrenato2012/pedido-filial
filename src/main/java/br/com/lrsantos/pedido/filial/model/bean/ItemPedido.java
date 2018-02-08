@@ -21,8 +21,11 @@ public class ItemPedido implements Serializable {
 	@EmbeddedId
 	private ItemPedidoID id;
 
-	@Column(precision=6, scale=2)
-	private BigDecimal valor;
+	@Column( name="valor_unitario", precision=6, scale=2)
+	private BigDecimal valorUnitario;
+	
+	@Column( name="valor_total", precision=6, scale=2)
+	private BigDecimal valorTotal;
 	
 	@Column
 	private Integer quantidade;
@@ -40,12 +43,12 @@ public class ItemPedido implements Serializable {
 		this.id = id;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setValorUnitario(BigDecimal valor) {
+		this.valorUnitario = valor;
 	}
 
 	public Produto getProduto() {
@@ -63,8 +66,18 @@ public class ItemPedido implements Serializable {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
-
 	
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+
+
+
 	public static class ItemPedidoID implements Serializable{
 		
 		private static final long serialVersionUID = -2058609977546062085L;
